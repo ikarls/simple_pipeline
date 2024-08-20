@@ -16,6 +16,23 @@ properties:
     type: string
     description: name or path to a default docker/singularity container
 
+
+
+# Entry added using Hydra-Genetics CLI - please move it into alphabetically sorted order
+  picard_add_comments_to_bam:
+    type: object
+    description: parameters for picard_add_comments_to_bam
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
 required:
   - samples
   - units

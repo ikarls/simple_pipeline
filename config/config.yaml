@@ -5,3 +5,40 @@ samples: "samples.tsv"
 units: "units.tsv"
 
 default_container: "docker://hydragenetics/common:0.1.9"
+
+# pre-alignment
+fastp_pe:
+  container: "docker://hydragenetics/fastp:0.20.1"
+
+sortmerna:
+  container: "docker://hydragenetics/sortmerna:4.3.4"
+  extra: "-e 0.000001"
+  fasta:
+    - "reference/genome.fasta"
+  index: "reference/idx"
+
+trimmer_software: "fastp_pe"
+
+# alignment
+reference:
+  fasta: "reference/WASH7P.fna"
+  fai: "reference/WASH7P.fna.fai"
+
+bwa_mem:
+  container: "docker://hydragenetics/bwa_mem:0.7.17"
+  amb: "reference/WASH7P.fna.amb"
+  ann: "reference/WASH7P.fna.ann"
+  bwt: "reference/WASH7P.fna.bwt"
+  pac: "reference/WASH7P.fna.pac"
+  sa: "reference/WASH7P.fna.sa"
+
+picard_mark_duplicates:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+star:
+  container: "docker://hydragenetics/star:2.7.10a"
+  genome_index: "reference/star_idx"
+
+picard_add_comments_to_bam:
+  container: "docker://hydragenetics/picard:2.25.0"
+

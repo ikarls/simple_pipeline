@@ -1,5 +1,11 @@
 ---
  files: 
    - name: "_copy_samples_tsv"
-     output: "result/samples.tsv"
+     output: "results/samples.tsv"
      input: "samples.tsv"
+   - name: "_merged_bam"
+     output: "results/{sample}_{type}.bam"
+     input: "alignment/samtools_merge_bam/{sample}_{type}.bam"
+   - name: "_commented_bam"
+     output: "results/{sample}_{type}.comments.bam"
+     input: "alignment/picard_add_comments_to_bam/{sample}_{type}.comments.bam"

@@ -6,6 +6,7 @@ __license__ = "GPL-3"
 
 # Include pipeline specific rules
 include: "rules/common.smk"
+include: "rules/picard.smk"
 
 
 # 'All' rule, must be specified before any other modules are
@@ -16,3 +17,29 @@ rule all:
 
 
 # Include modules
+module prealignment:
+    snakefile:
+        github(
+            "hydra-genetics/prealignment",
+            path="workflow/Snakefile",
+            tag="v1.1.0",
+        )
+    config:
+        config
+
+
+use rule * from prealignment as prealignment_*
+
+
+module alignment:
+    snakefile:
+        github(
+            "hydra-genetics/alignment",
+            path="workflow/Snakefile",
+            tag="v0.4.0",
+        )
+    config:
+        config
+
+
+use rule * from alignment as alignment_*
